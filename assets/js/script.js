@@ -1,49 +1,73 @@
 
 
-jQuery(document).ready(function($){  
+jQuery(document).ready(function($)
+{  
 
-    $("#keyword").on("keyup",function(){
-        var keyword = $(this).val();
-        jQuery.ajax({
-            url:   ajax_object.ajaxurl,
-            type: 'POST',
-            data: { 
-                action: 'data_fetch',  
-                keyword: keyword 
-            },
-            success: function(data) {
-                jQuery('#datafetch').html( data );
-            }
-        });
-    });
+    $('#setting_menu').parent().hide();
+    $('#setting_menu').parent().siblings().hide();
 
-    $("#mySelection").change(function(){
-        var keyword = $(this).find("option:selected").text();
-        var keyword = $(this).val();
+    $('#multiple_menu').parent().hide();
+    $('#multiple_menu').parent().siblings().hide();
 
-        jQuery.ajax({
-            url:   ajax_object.ajaxurl,
-            type: 'POST',
-            data: { 
-                action: 'data_drop',  
-                keyword: keyword 
-            },
-            success: function(data) {
-            jQuery('#datafetch').html( data );
-            }
-        });
-    });
-
-    $('#collect_product_id').prop('required',false).parent().hide();
-    if($('#checkbox').prop("checked") == true){
-        $('#collect_product_id').prop('required',true).parent().show();   
+    if( $('#setting_tab_Maintance_checkbox').prop('checked') )
+    {
+        $('#setting_menu').parent().show();
+        $('#setting_menu').parent().siblings().show();
+    
+        $('#multiple_menu').parent().show();
+        $('#multiple_menu').parent().siblings().show();
     }
-    $('#checkbox').click(function(){
-        if($(this).prop("checked") == true){
-            $('#collect_product_id').prop('required',true).parent().show();   
+    else
+    {
+        $('#setting_menu').parent().hide();
+        $('#setting_menu').parent().siblings().hide();
+    
+        $('#multiple_menu').parent().hide();
+        $('#multiple_menu').parent().siblings().hide();
+    }
+
+    $('#setting_tab_Maintance_checkbox').click(function()
+    {
+        if( $('#setting_tab_Maintance_checkbox').prop('checked') )
+        {
+            $('#setting_menu').parent().show();
+            $('#setting_menu').parent().siblings().show();
+        
+            $('#multiple_menu').parent().show();
+            $('#multiple_menu').parent().siblings().show();
         }
-        else if($(this).prop("checked") == false){
-            $('#collect_product_id').prop('required',false).parent().hide();
+        else
+        {
+            $('#setting_menu').parent().hide();
+            $('#setting_menu').empty();
+            $('#setting_menu').parent().siblings().hide();
+        
+            $('#multiple_menu').parent().hide();
+            $('#multiple_menu').empty();
+            $('#multiple_menu').parent().siblings().hide();
         }
+
     });
+
+
+    // $('#setting_menu').parent().hide();
+    // $('#multiple_menu').parent().hide();
+    // if($('#setting_tab_Maintance_checkbox').prop("checked") == true){
+    //     $('#setting_menu').parent().show();
+    //     $('#multiple_menu').parent().show();   
+    // }
+    // $('#setting_tab_Maintance_checkbox').click(function(){
+    //     if($(this).prop("checked") == true){
+    //         $('#setting_menu').parent().show();
+    //         $('#multiple_menu').parent().show();   
+    //     }
+    //     else if($(this).prop("checked") == false){
+    //         $('#setting_menu').parent().hide();
+    //         $('#setting_menu').remove();
+    //         $('#multiple_menu').parent().hide();
+    //         $('#multiple_menu').remove();
+    //     }
+    // });
+
+    $('#multiple_menu').select2({});
 });
